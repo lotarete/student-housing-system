@@ -1,13 +1,13 @@
 import java.util.Date;
 
-public class omanik implements Kasutajad {
+public class Omanik implements Kasutajad {
     private String eesnimi;
     private String perenimi;
     private String email;
     private String telefon;
     private Date synnipaev;
 
-    public omanik(String eesnimi, String perenimi, String email, String telefon) {
+    public Omanik(String eesnimi, String perenimi, String email, String telefon) {
         this.eesnimi = eesnimi;
         this.perenimi = perenimi;
         this.email = email;

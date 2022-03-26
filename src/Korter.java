@@ -1,4 +1,4 @@
-public class korter extends Kinnisvara{
+public class Korter extends Kinnisvara{
     //loome id
     private static int counter = 0;
     private int Id;
