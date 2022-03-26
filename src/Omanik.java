@@ -56,4 +56,11 @@ public class Omanik implements Kasutajad {
                 '}';
 
     }
+
+    public void lisaKinnisvara(){
+    }
+
+    public void kustutaKinnisvara(){
+    }
+
 }

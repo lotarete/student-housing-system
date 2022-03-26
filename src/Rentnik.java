@@ -66,4 +66,25 @@ public class Rentnik implements Kasutajad {
                 ", synnipaev=" + synnipaev +
                 '}';
     }
+
+    public String otsiKinnisvara(){
+        return null;
+    }
+
+    public void lisaKausta(){
+
+    }
+
+    public void jagaKausta(){
+
+    }
+
+    public void väljastaKaust(){
+
+    }
+
+    //?
+    public void otsiOmanik(){
+
+    }
 }
