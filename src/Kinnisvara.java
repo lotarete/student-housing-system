@@ -5,7 +5,7 @@ public class Kinnisvara {
     static int counter = 0; //couner aitab luua id-d, pärast iga uut kinnisvara seda suurendatakse 1 võrra
     private int Id; //loome id
     private String nimi = null; //kinnisvara nime ei pea lisama, kui ei ole lisatud siis genereeritakse nimeks aadressi ja tubade arvu järgi pealkiri
-    private Omanik omanik;
+    private Kasutaja omanik;
     private double hindkuus;
     private double m2; // ruutmeeri hind arvutatakse meetodiga
     private String maakond = null;
@@ -16,13 +16,15 @@ public class Kinnisvara {
     private int tube;
     private double magamistube; //võib olla ka nt 2,5 magamistuba, kus poolik on potentsiaalne magamistuba
     private double vannitube; //võib olla ka 0,5 vannituba, kus pooliu all on mõeldud ainult vetsu
-    private double aed; //väärtused 0 - ei 1 - on
+    private String aed; //väärtused 0 - ei 1 - on
     private String kirjeldus;
     private List<String> lisad = new ArrayList<>(); //garaaž,parkimiskoht,nõudepesumasin, pesumasin jne, neid saab lisada kas kohe konstruktoris või hiljem lisada ka eraldi meetodiga
 
-    public Kinnisvara(String nimi, Omanik omanik, double hindkuus, double m2, String maakond, String linn, String tänav, String majanumber, String korrus, int tube, double magamistube, double vannitube, double aed, String kirjeldus, List<String> lisad) {
+    public Kinnisvara() {
+    }
+
+    public Kinnisvara(Kasutaja omanik, double hindkuus, double m2, String maakond, String linn, String tänav, String majanumber, String korrus, int tube, double magamistube, double vannitube, String aed, String kirjeldus) {
         Id = Id = ++counter;
-        this.nimi = nimi;
         this.omanik = omanik;
         this.hindkuus = hindkuus;
         this.m2 = m2;
@@ -36,7 +38,6 @@ public class Kinnisvara {
         this.vannitube = vannitube;
         this.aed = aed;
         this.kirjeldus = kirjeldus;
-        this.lisad = lisad;
     }
 
     public int getId() {
@@ -47,7 +48,7 @@ public class Kinnisvara {
         return nimi;
     }
 
-    public Omanik getOmanik() {
+    public Kasutaja getOmanik() {
         return omanik;
     }
 
@@ -91,7 +92,7 @@ public class Kinnisvara {
         return vannitube;
     }
 
-    public double getAed() {
+    public String getAed() {
         return aed;
     }
 
@@ -148,7 +149,7 @@ public class Kinnisvara {
         this.vannitube = vannitube;
     }
 
-    public void setAed(double aed) {
+    public void setAed(String aed) {
         this.aed = aed;
     }
 
@@ -165,5 +166,25 @@ public class Kinnisvara {
         lisad.remove(indeks);
     }
 
-
+    @Override
+    public String toString() {
+        return "Kinnisvara{" +
+                "Id=" + Id +
+                ", nimi='" + nimi + '\'' +
+                ", omanik=" + omanik +
+                ", hindkuus=" + hindkuus +
+                ", m2=" + m2 +
+                ", maakond='" + maakond + '\'' +
+                ", linn='" + linn + '\'' +
+                ", tänav='" + tänav + '\'' +
+                ", majanumber='" + majanumber + '\'' +
+                ", korrus='" + korrus + '\'' +
+                ", tube=" + tube +
+                ", magamistube=" + magamistube +
+                ", vannitube=" + vannitube +
+                ", aed='" + aed + '\'' +
+                ", kirjeldus='" + kirjeldus + '\'' +
+                ", lisad=" + lisad +
+                '}';
+    }
 }
