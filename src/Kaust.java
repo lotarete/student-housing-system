@@ -7,8 +7,9 @@ public class Kaust {
     private Rentnik omanik;
     private List<Rentnik> kasutajad = new ArrayList<>();
     private List<Kinnisvara> kinnisvarad = new ArrayList<>();
-    private HashMap<List<Kinnisvara>, List<Double>> KinnisvaradHinnangud = new HashMap<List<Kinnisvara>, List<Double>>();
-    private HashMap<List<Kinnisvara>, Double> KinnisvaradKeskmised = new HashMap<List<Kinnisvara>, Double>();
+    private List<Double> hinnangud=new ArrayList<>();
+    private HashMap<Kinnisvara, List<Double>> KinnisvaradHinnangud = new HashMap<Kinnisvara, List<Double>>();
+    private HashMap<Kinnisvara, Double> KinnisvaradKeskmised = new HashMap<Kinnisvara, Double>();
 
     public Kaust(String nimi, Rentnik omanik, List<Rentnik> kasutajad) {
         this.nimi = nimi;
@@ -16,17 +17,21 @@ public class Kaust {
         this.kasutajad = kasutajad;
     }
 
-    //võimaldab kõigil kasutajatel lisada hinnangu kaustas olevale kinnisvarale, kõik ei pea lisama aga võivad.
-
-    public void lisaHinnang(){
-        //loome hinnangute listi, kui kinnisvarale vastav hinnagutelist on tühi? (if lause)
-        //else kui hinnangute list on juba olemas siis lisame sinna hinnangu;
-        //käivitame arvutakeskmine (keskmise sees ->  ja arvutame listi uue keskmise ja lisame selle hashmapile Kinnisvaradkeskmine)
-
+    public void lisaHinnang(Kinnisvara kinnisvara, double hinnang){
+        hinnangud.add(hinnang);
+        arvutaKeskmineHinnang(kinnisvara, hinnangud);
     }
 
-    public void arvutaKeskmineHinnang(){} //arvutab kinnisvarale keskmise hinnagulistie järgi ja lisab selle hashmappi
+    public void arvutaKeskmineHinnang(Kinnisvara kinnisvara,List<Double> hinnangud){
+        double summa=0; int n=0;
+        for(double arv:hinnangud){
+            summa+=arv;
+            n++;
+        }
+        double keskm = summa/n;
+        KinnisvaradKeskmised.put(kinnisvara, keskm);
 
+    }
 
 
     public String getNimi() {
