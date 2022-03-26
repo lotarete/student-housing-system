@@ -9,6 +9,7 @@ public class Rentnik implements Kasutajad {
     private String telefon;
     private Date synnipaev;
     private List<Kaust> kaustad = new ArrayList<>();
+    private List<Kinnisvara> kinnisvarad = new ArrayList<>();
 
     public Rentnik(String eesnimi, String perenimi, String email, String telefon, Date synnipaev) {
         this.eesnimi = eesnimi;
@@ -17,6 +18,36 @@ public class Rentnik implements Kasutajad {
         this.telefon = telefon;
         this.synnipaev = synnipaev;
     }
+
+
+    public String otsiKinnisvara(){
+        return null;
+    }
+
+    public void lisaKaust(Kaust kaust){
+        kaustad.add(kaust);
+    }
+
+    public void eemaldaKaust(Kaust kaust){
+        kaustad.remove(kaust);
+    }
+
+    public void jagaKausta(Kaust kaust, Rentnik sõber){
+        List<Rentnik> kasutajad = kaust.getKasutajad();
+        kasutajad.add(sõber);
+    }
+
+    public void lahkuKaustast(Kaust kaust, Rentnik sõber){
+        List<Rentnik> kasutajad = kaust.getKasutajad();
+        kasutajad.remove(sõber);
+
+    }
+
+    //?
+    public void otsiOmanik(){
+    }
+
+
 
 
     public String getEesnimi() {
@@ -68,37 +99,5 @@ public class Rentnik implements Kasutajad {
                 ", telefon='" + telefon + '\'' +
                 ", synnipaev=" + synnipaev +
                 '}';
-    }
-
-    public String otsiKinnisvara(){
-        return null;
-    }
-
-    public void looKaust(Kaust kaust){
-
-    }
-
-    public void lisaKausta(Kaust kaust){
-
-    }
-    public void eemaldaKaustast(Kaust kaust){
-
-    }
-
-    public void jagaKausta(Kaust kaust, Rentnik sõber){
-
-    }
-
-    public void lahkuKaustast(Kaust kaust, Rentnik sõber){
-
-    }
-
-    public void väljastaKaust(){
-
-    }
-
-    //?
-    public void otsiOmanik(){
-
     }
 }
