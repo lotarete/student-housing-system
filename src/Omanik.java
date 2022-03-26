@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Omanik implements Kasutajad {
     private String eesnimi;
@@ -6,12 +8,14 @@ public class Omanik implements Kasutajad {
     private String email;
     private String telefon;
     private Date synnipaev;
+    private List<Kinnisvara> kinnisvarad = new ArrayList<>();
 
-    public Omanik(String eesnimi, String perenimi, String email, String telefon) {
+    public Omanik(String eesnimi, String perenimi, String email, String telefon, Date synnipaev) {
         this.eesnimi = eesnimi;
         this.perenimi = perenimi;
         this.email = email;
         this.telefon = telefon;
+        this.synnipaev = synnipaev;
     }
 
     public String getEesnimi() {
@@ -30,6 +34,8 @@ public class Omanik implements Kasutajad {
         return telefon;
     }
 
+    public Date getSynnipaev() {return synnipaev;}
+
     public void setEesnimi(String eesnimi) {
         this.eesnimi = eesnimi;
     }
@@ -46,6 +52,8 @@ public class Omanik implements Kasutajad {
         this.telefon = telefon;
     }
 
+    public void setSynnipaev(Date synnipaev) {this.synnipaev = synnipaev;}
+
     @Override
     public String toString() {
         return "omanik{" +
@@ -57,10 +65,13 @@ public class Omanik implements Kasutajad {
 
     }
 
-    public void lisaKinnisvara(){
+    public void lisaKinnisvara(Kinnisvara kinnisvara) {
+        kinnisvarad.add(kinnisvara);
     }
 
-    public void kustutaKinnisvara(){
+    public void kustutaKinnisvara(Kinnisvara kinnisvara){
+        kinnisvarad.remove(kinnisvara);
     }
+
 
 }
