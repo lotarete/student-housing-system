@@ -1,18 +1,20 @@
 import java.util.Date;
 
-public class omanik implements Kasutajad {
+public class Rentnik implements Kasutajad {
     private String eesnimi;
     private String perenimi;
     private String email;
     private String telefon;
     private Date synnipaev;
 
-    public omanik(String eesnimi, String perenimi, String email, String telefon) {
+    public Rentnik(String eesnimi, String perenimi, String email, String telefon, Date synnipaev) {
         this.eesnimi = eesnimi;
         this.perenimi = perenimi;
         this.email = email;
         this.telefon = telefon;
+        this.synnipaev = synnipaev;
     }
+
 
     public String getEesnimi() {
         return eesnimi;
@@ -28,6 +30,10 @@ public class omanik implements Kasutajad {
 
     public String getTelefon() {
         return telefon;
+    }
+
+    public Date getSynnipaev() {
+        return synnipaev;
     }
 
     public void setEesnimi(String eesnimi) {
@@ -46,14 +52,18 @@ public class omanik implements Kasutajad {
         this.telefon = telefon;
     }
 
+    public void setSynnipaev(Date synnipaev) {
+        this.synnipaev = synnipaev;
+    }
+
     @Override
     public String toString() {
-        return "omanik{" +
+        return "rentnik{" +
                 "eesnimi='" + eesnimi + '\'' +
                 ", perenimi='" + perenimi + '\'' +
                 ", email='" + email + '\'' +
                 ", telefon='" + telefon + '\'' +
+                ", synnipaev=" + synnipaev +
                 '}';
-
     }
 }
