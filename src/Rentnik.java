@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Rentnik implements Kasutajad {
     private String eesnimi;
@@ -6,6 +8,7 @@ public class Rentnik implements Kasutajad {
     private String email;
     private String telefon;
     private Date synnipaev;
+    private List<Kaust> kaustad = new ArrayList<>();
 
     public Rentnik(String eesnimi, String perenimi, String email, String telefon, Date synnipaev) {
         this.eesnimi = eesnimi;
@@ -71,11 +74,22 @@ public class Rentnik implements Kasutajad {
         return null;
     }
 
-    public void lisaKausta(){
+    public void looKaust(Kaust kaust){
 
     }
 
-    public void jagaKausta(){
+    public void lisaKausta(Kaust kaust){
+
+    }
+    public void eemaldaKaustast(Kaust kaust){
+
+    }
+
+    public void jagaKausta(Kaust kaust, Rentnik sõber){
+
+    }
+
+    public void lahkuKaustast(Kaust kaust, Rentnik sõber){
 
     }
 
