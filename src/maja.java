@@ -1,2 +1,2 @@
-public class maja implements kinnisvara{
+public class maja extends Kinnisvara{
 }
