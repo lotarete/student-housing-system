@@ -5,24 +5,33 @@ import java.util.List;
 public class Kaust {
     private String nimi;
     private Rentnik omanik;
-    private List<Rentnik> kasutajad = new ArrayList<>();
-    private List<Kinnisvara> kinnisvarad = new ArrayList<>();
-    private List<Double> hinnangud=new ArrayList<>();
-    private HashMap<Kinnisvara, List<Double>> KinnisvaradHinnangud = new HashMap<Kinnisvara, List<Double>>();
+    private List<Rentnik> kaustaKasutajad = new ArrayList<>();
     private HashMap<Kinnisvara, Double> KinnisvaradKeskmised = new HashMap<Kinnisvara, Double>();
+    private HashMap<Kinnisvara, List<Double>> KinnisvaradHinnangud = new HashMap<Kinnisvara, List<Double>>();
 
-    public Kaust(String nimi, Rentnik omanik, List<Rentnik> kasutajad) {
+
+    public Kaust(String nimi, Rentnik omanik) {
         this.nimi = nimi;
         this.omanik = omanik;
-        this.kasutajad = kasutajad;
+    }
+
+    public Kaust() {
     }
 
     public void lisaHinnang(Kinnisvara kinnisvara, double hinnang){
+        List<Double> hinnangud;
+        if(KinnisvaradHinnangud.get(kinnisvara) == null){
+            hinnangud= new ArrayList<>();
+        }
+        else{
+            hinnangud= KinnisvaradHinnangud.get(kinnisvara);
+        }
         hinnangud.add(hinnang);
+        KinnisvaradHinnangud.put(kinnisvara,hinnangud);
         arvutaKeskmineHinnang(kinnisvara, hinnangud);
     }
 
-    public void arvutaKeskmineHinnang(Kinnisvara kinnisvara,List<Double> hinnangud){
+    public void arvutaKeskmineHinnang(Kinnisvara kinnisvara, List<Double> hinnangud){
         double summa=0; int n=0;
         for(double arv:hinnangud){
             summa+=arv;
@@ -30,7 +39,6 @@ public class Kaust {
         }
         double keskm = summa/n;
         KinnisvaradKeskmised.put(kinnisvara, keskm);
-
     }
 
 
@@ -50,11 +58,20 @@ public class Kaust {
         this.omanik = omanik;
     }
 
-    public List<Rentnik> getKasutajad() {
-        return kasutajad;
+    public List<Rentnik> getKaustaKasutajad() {
+        return kaustaKasutajad;
     }
 
-    public void setKasutajad(List<Rentnik> kasutajad) {
-        this.kasutajad = kasutajad;
+    public void setKaustaKasutajad(List<Rentnik> kaustaKasutajad) {
+        this.kaustaKasutajad = kaustaKasutajad;
     }
+
+    public HashMap<Kinnisvara, Double> getKinnisvaradKeskmised() {
+        return KinnisvaradKeskmised;
+    }
+
+    public void setKinnisvaradKeskmised(HashMap<Kinnisvara, Double> kinnisvaradKeskmised) {
+        KinnisvaradKeskmised = kinnisvaradKeskmised;
+    }
+
 }

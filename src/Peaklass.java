@@ -64,120 +64,250 @@ public class Peaklass {
                 System.out.println("Palun sisesta küsitud andmed korrektselt!");
             System.out.println(aktiivnekasutaja.getClass());
             //omaniku tegevused
-            if(aktiivnekasutaja instanceof Omanik){
+            if(aktiivnekasutaja instanceof Omanik) {
                 System.out.println("Vali tegevus:");
                 System.out.println(
-                        "1 - lisa kinnisvara" + "\n" +
-                        "2 - kustuta kinnisvara" + "\n" +
-                        "3 - vaata oma kinnisvara" + "\n");
+                                "0 - kui soovite portaalist lahkuda" + "\n" +
+                                "1 - lisa kinnisvara" + "\n" +
+                                "2 - kustuta kinnisvara" + "\n" +
+                                "3 - vaata oma kinnisvara" + "\n");
                 int tegevus = scan.nextInt();
-                if(tegevus == 1){
-                    Kasutaja omanik = aktiivnekasutaja;
-                    System.out.println("Lisame kinnisvara." +"\n"+ "Kas tegu on maja (sistage 0) või korteriga (sisetage 1)");
-                    scan.nextLine();
-                    int kvtyyp = scan.nextInt();
-                    System.out.println("Sisestage üüripinna kuurent eurodes");
-                    scan.nextLine();
-                    double hindkuus = scan.nextDouble();
-                    System.out.println("Sisestage üüripind ruutmeetrites");
-                    scan.nextLine();
-                    double m2 = scan.nextDouble();
-                    System.out.println("Sisetage maakond");
-                    scan.nextLine();
-                    String maakond = scan.nextLine();
-                    System.out.println("Sisetage asula, kui asula puudub sisetage \"puudub\"");
-                    String linnsisse = scan.nextLine();
-                    String linn = new String();
-                    if (!linnsisse.equals("puudub"))
-                          linn = linnsisse;
-                    else
-                        linn = "täpsustamata";
-                    System.out.println("Sisetage tänav, kui tänav puudub sisetage \"puudub\"");
-                    String tänavsisse = scan.nextLine();
-                    String tänav = new String();
-                    if (!linnsisse.equals("puudub"))
-                        tänav = tänav;
-                    else
-                        tänav = "täpsustamata";
-                    System.out.println("Sisetage tänavanumber");
-                    String majanumber = scan.nextLine();
-                    System.out.println("Sisetage korrus kujul korrus/korruseid kokku, kui mitu korrust siis korrus-korrus/korruseidkokku");
-                    String korrus = scan.nextLine();
-                    System.out.println("Sisetage tubade arv");
-                    int tube =  scan.nextInt();
-                    System.out.println("Sisetage magamistubade arv");
-                    double magamistube = scan.nextDouble();
-                    System.out.println("Sisetage vannitubade arv");
-                    double vannitube = scan.nextDouble();
-                    System.out.println("Kas üüripinnal on aed? Sisetage \"jah\", \"ei\"");
-                    scan.nextLine();
-                    String aed = scan.nextLine();
-                    System.out.println("Lisage lühike kirjeldus");
-                    String kirjeldus = scan.nextLine();
-                    if(kvtyyp==0)
-                        kinnisvarad.add(new Maja(omanik, hindkuus,m2, maakond, linn, tänav, majanumber, korrus,tube,magamistube,vannitube,aed, kirjeldus));
-                    else if (kvtyyp==1)
-                        kinnisvarad.add(new Korter(omanik, hindkuus,m2, maakond, linn, tänav, majanumber, korrus,tube,magamistube,vannitube,aed, kirjeldus));
-                    System.out.println("Kas korteril on erilisi lisasid nagu näiteks garaaž, saun, terass jne? Sistage 0, kui soovite sisetada kuulutusele lisasid, 1 kui soovite kinnisvara portaali lisada");
-                    int lisasidsistema = scan.nextInt();
-                    if(lisasidsistema==0){
-                        System.out.println("Sisetage lisad kujul: lisa, lisa, lisa jne");
+                while (tegevus != 0) {
+                    if (tegevus == 1) {
+                        Kasutaja omanik = aktiivnekasutaja;
+                        System.out.println("Lisame kinnisvara." + "\n" + "Kas tegu on maja (sistage 0) või korteriga (sisetage 1)");
                         scan.nextLine();
-                        String lisarida = scan.nextLine();
-                        List<String> lisad = new ArrayList<String>(Arrays.asList(lisarida.strip().split(", ")));
-                        for(String Lisa: lisad){
-                            kinnisvarad.get(kinnisvarad.size()-1).lisaLisa(Lisa);
+                        int kvtyyp = scan.nextInt();
+                        System.out.println("Sisestage üüripinna kuurent eurodes");
+                        scan.nextLine();
+                        double hindkuus = scan.nextDouble();
+                        System.out.println("Sisestage üüripind ruutmeetrites");
+                        scan.nextLine();
+                        double m2 = scan.nextDouble();
+                        System.out.println("Sisetage maakond");
+                        scan.nextLine();
+                        String maakond = scan.nextLine();
+                        System.out.println("Sisetage asula, kui asula puudub sisetage \"puudub\"");
+                        String linnsisse = scan.nextLine();
+                        String linn = new String();
+                        if (!linnsisse.equals("puudub"))
+                            linn = linnsisse;
+                        else
+                            linn = "täpsustamata";
+                        System.out.println("Sisetage tänav, kui tänav puudub sisetage \"puudub\"");
+                        String tänavsisse = scan.nextLine();
+                        String tänav = new String();
+                        if (!linnsisse.equals("puudub"))
+                            tänav = tänav;
+                        else
+                            tänav = "täpsustamata";
+                        System.out.println("Sisetage tänavanumber");
+                        String majanumber = scan.nextLine();
+                        System.out.println("Sisetage korrus kujul korrus/korruseid kokku, kui mitu korrust siis korrus-korrus/korruseidkokku");
+                        String korrus = scan.nextLine();
+                        System.out.println("Sisetage tubade arv");
+                        int tube = scan.nextInt();
+                        System.out.println("Sisetage magamistubade arv");
+                        double magamistube = scan.nextDouble();
+                        System.out.println("Sisetage vannitubade arv");
+                        double vannitube = scan.nextDouble();
+                        System.out.println("Kas üüripinnal on aed? Sisetage \"jah\", \"ei\"");
+                        scan.nextLine();
+                        String aed = scan.nextLine();
+                        System.out.println("Lisage lühike kirjeldus");
+                        String kirjeldus = scan.nextLine();
+                        if (kvtyyp == 0)
+                            kinnisvarad.add(new Maja(omanik, hindkuus, m2, maakond, linn, tänav, majanumber, korrus, tube, magamistube, vannitube, aed, kirjeldus));
+                        else if (kvtyyp == 1)
+                            kinnisvarad.add(new Korter(omanik, hindkuus, m2, maakond, linn, tänav, majanumber, korrus, tube, magamistube, vannitube, aed, kirjeldus));
+                        System.out.println("Kas korteril on erilisi lisasid nagu näiteks garaaž, saun, terass jne? Sistage 0, kui soovite sisetada kuulutusele lisasid, 1 kui soovite kinnisvara portaali lisada");
+                        int lisasidsistema = scan.nextInt();
+                        if (lisasidsistema == 0) {
+                            System.out.println("Sisetage lisad kujul: lisa, lisa, lisa jne");
+                            scan.nextLine();
+                            String lisarida = scan.nextLine();
+                            List<String> lisad = new ArrayList<String>(Arrays.asList(lisarida.strip().split(", ")));
+                            for (String Lisa : lisad) {
+                                kinnisvarad.get(kinnisvarad.size() - 1).lisaLisa(Lisa);
+                            }
+                            //lisame kinnisvara omaniku kinnisvaradele
+                            ((Omanik) aktiivnekasutaja).lisaKinnisvara(kinnisvarad.get(kinnisvarad.size() - 1));
+                            System.out.println("Kinnisvara on lisatud!");
+                            System.out.println("Sinu kinnisvarad on: ");
+                            for (Kinnisvara kv : ((Omanik) aktiivnekasutaja).getOmanikukinnisvarad()) {
+                                System.out.println(kv);
+                            }
                         }
-                    //lisame kinnisvara omaniku kinnisvaradele
-                    ((Omanik) aktiivnekasutaja).lisaKinnisvara(kinnisvarad.get(kinnisvarad.size()-1));
-                    System.out.println("Kinnisvara on lisatud!");
-                    System.out.println("Sinu kinnisvarad on: ");
-                        for (Kinnisvara kv: ((Omanik)aktiivnekasutaja).getOmanikukinnisvarad()) {
+                    } else if (tegevus == 2) {
+                        System.out.println("Sinu kinnisvarad on: ");
+                        for (Kinnisvara kv : ((Omanik) aktiivnekasutaja).getOmanikukinnisvarad()) {
                             System.out.println(kv);
                         }
-                }}
-                else if(tegevus == 2){
-                    System.out.println("Sinu kinnisvarad on: ");
-                    for (Kinnisvara kv: ((Omanik)aktiivnekasutaja).getOmanikukinnisvarad()) {
-                        System.out.println(kv);
-                    }
-                    System.out.println("Sisesta kinnisvara id mida soovid kustutada");
-                    int kustutaindeks = scan.nextInt();
-                    Kinnisvara kustuta = new Kinnisvara();
-                    for (Kinnisvara kv: kinnisvarad) {
-                        if(kv.getId()==kustutaindeks){
-                            kustuta = kv;
+                        System.out.println("Sisesta kinnisvara id, mida soovid kustutada");
+                        int kustutaindeks = scan.nextInt();
+                        Kinnisvara kustuta = new Kinnisvara();
+                        for (Kinnisvara kv : kinnisvarad) {
+                            if (kv.getId() == kustutaindeks) {
+                                kustuta = kv;
+                            }
                         }
-                    }
-                    //kustutame portaalist
-                    kinnisvarad.remove(kustuta);
-                    //kustutame omaiku kinnisvarast
-                    ((Omanik) aktiivnekasutaja).kustutaKinnisvara(kustuta);
-                    System.out.println("Kinnisvara on kustutatud");
+                        //kustutame portaalist
+                        kinnisvarad.remove(kustuta);
+                        //kustutame omaiku kinnisvarast
+                        ((Omanik) aktiivnekasutaja).kustutaKinnisvara(kustuta);
+                        System.out.println("Kinnisvara on kustutatud");
 
-                }
-                else if(tegevus == 3){
-                    System.out.println(((Omanik) aktiivnekasutaja).getOmanikukinnisvarad());
+                    } else if (tegevus == 3) {
+                        System.out.println(((Omanik) aktiivnekasutaja).getOmanikukinnisvarad());
+                    }
+                    System.out.println("Vali uuesti tegevus:");
+                    System.out.println(
+                                    "0 - kui soovite portaalist lahkuda" + "\n" +
+                                    "1 - lisa kinnisvara" + "\n" +
+                                    "2 - kustuta kinnisvara" + "\n" +
+                                    "3 - vaata oma kinnisvara" + "\n");
+                    tegevus = scan.nextInt();
                 }
             }
             //rentniku tegevused
-            else if (aktiivnekasutaja instanceof Rentnik){ //ma panin mingi põhja siia , is mul endal tegemuise käigus tuli
+            else if (aktiivnekasutaja instanceof Rentnik){
                 System.out.println("Vali tegevus:");
                 System.out.println(
-                        "1 - lisa kinnisvara" + "\n" +
-                                "2 - kustuta kinnisvara" + "\n" +
-                                "3 - vaata oma kinnisvara" + "\n" +
-                                "3 - muuda oma kinnisvara" + "\n" );
+                                "0 - kui soovite portaalist lahkuda" + "\n" +
+                                "1 - otsi kinnisvara" + "\n" +
+                                "2 - loo endale kaust" + "\n" +
+                                "3 - lisa sõber kausta" + "\n" +
+                                "4 - eemalda end kaustast" + "\n" );
                 int tegevus = scan.nextInt();
-                if(tegevus == 1){}
-                else if(tegevus == 1){}
-                else if(tegevus == 1){}
-                else if(tegevus == 1){}
+                while(tegevus!=0){
+                if(tegevus == 1){ //hetkel väljastab kõik saadaolevad pakkumised, ei tee suuremat filtreerimist, hiljem teen täpsemaks
+                    System.out.println("Mille üürimisest oleksite huvitatud – maja (sisestage 0), korteri (sisestage 1), mõlema (sisestage 2)");
+                    int valik1= scan.nextInt();
+                    if(valik1 == 0){
+                        System.out.println("Saadaolevad majad on järgmised: ");
+                        for(Kinnisvara kinnisvara : kinnisvarad){
+                            if (kinnisvara instanceof Maja){
+                                System.out.println(kinnisvara);
+                            }
+                        }
+                    }
+                    else if(valik1 == 1){
+                        System.out.println("Saadaolevad korterid on järgmised: ");
+                        for(Kinnisvara kinnisvara : kinnisvarad){
+                            if (kinnisvara instanceof Korter){
+                                System.out.println(kinnisvara);
+                            }
+                        }
+                    }
+                    else if(valik1 == 2){
+                        System.out.println("Saadaolevad kinnisvarad on järgmised: ");
+                        for(Kinnisvara kinnisvara : kinnisvarad){
+                            System.out.println(kinnisvara);
+                        }
+                    }
+                }
+                else if(tegevus == 2){ //loome kausta
+                    System.out.println("Loome kausta: ");
+                    System.out.println("Pange enda kaustale nimi: ");
+                    scan.nextLine();
+                    String kaustaNimi=scan.nextLine();
+                    System.out.println("Sisestage kinnisvarade arv, mida soovite kausta lisada: ");
+                    int n= scan.nextInt();
+
+                    Kinnisvara abiks = new Kinnisvara();
+                    Kaust abi = new Kaust();
+
+
+                    ((Rentnik) aktiivnekasutaja).getKaustad().add(new Kaust(kaustaNimi, (Rentnik) aktiivnekasutaja));
+                    for(Kaust kaust: ((Rentnik) aktiivnekasutaja).getKaustad()){
+                        if(kaust.getNimi().equals(kaustaNimi)){
+                            abi=kaust;
+                        }
+                    }
+
+
+                    while(n > 0) {
+                        System.out.println("Sisestage kinnisvara id, mida soovite kausta lisada: ");
+                        int id=scan.nextInt();
+                        //võtab kinnisvara
+                        for(Kinnisvara kv:kinnisvarad) {
+                            if(kv.getId() == id){
+                                abiks = kv;
+                            }
+                        }
+                        n--;
+                        System.out.println("Lisage kinnisvarale id-ga "+id+" hinnang 1-10: ");
+                        double hinnang=scan.nextDouble();
+                        //loome hashmapi
+                        if(1 <= hinnang && hinnang <= 10){
+                            abi.lisaHinnang(abiks,hinnang);
+                        }
+                    }
+                }
+                else if(tegevus == 3){ //lisame inimesi kausta juurde
+                    System.out.println("Lisame kausta inimese juurde");
+                    System.out.println("Sisestage kausta nimi: ");
+                    String nimiK = scan.nextLine();
+                    Kaust abiKaust = null;
+                    Rentnik abiksKasutaja = null;
+                    for(Kaust kaust: ((Rentnik) aktiivnekasutaja).getKaustad()){
+                        if(nimiK.equals(kaust.getNimi())){
+                            abiKaust=kaust;
+                        }
+                    }
+                    System.out.println("Sisestage inimese eesnimi, keda soovite lisada: ");
+                    String enimi = scan.nextLine();
+                    System.out.println("Sisestage inimese perekonnanimi, keda soovite lisada: ");
+                    String pnimi = scan.nextLine();
+
+                    for(Kasutaja inimene : kasutajad){
+                        if(inimene instanceof Rentnik) {
+                            if (enimi.equals(inimene.getEesnimi()) && pnimi.equals(inimene.getPerenimi())) {
+                                abiksKasutaja=(Rentnik) inimene;
+                            }
+                        }
+                    }
+                    abiKaust.getKaustaKasutajad().add(abiksKasutaja);
+                    System.out.println("Kasutaja "+enimi+" "+pnimi+"on lisatud kausta "+nimiK+".");
+                }
+                else if(tegevus == 4){ //eemaldame inimese kaustast
+                    System.out.println("Eemaldame kaustast kasutaja: ");
+                    System.out.println("Sisestage kausta nimi: ");
+                    String kaustNimi = scan.nextLine();
+                    Kaust abiKaust = null;
+                    Rentnik abiksKasutaja = null;
+                    for(Kaust kaust: ((Rentnik) aktiivnekasutaja).getKaustad()){
+                        if(kaustNimi.equals(kaust.getNimi())){
+                            abiKaust=kaust;
+                        }
+                    }
+                    System.out.println("Sisestage inimese eesnimi, keda soovite eemaldada: ");
+                    String enimi = scan.nextLine();
+                    System.out.println("Sisestage inimese perekonnanimi, keda soovite eemaldada: ");
+                    String pnimi = scan.nextLine();
+
+
+                    for(Kasutaja inimene : kasutajad){
+                        if(inimene instanceof Rentnik) {
+                            if (enimi.equals(inimene.getEesnimi()) && pnimi.equals(inimene.getPerenimi())) {
+                                abiksKasutaja=(Rentnik) inimene;
+                            }
+                        }
+                    }
+                    abiKaust.getKaustaKasutajad().remove(abiksKasutaja);
+                    System.out.println("Kasutaja "+enimi+" "+pnimi+"on eemaldatud kaustast "+kaustNimi+".");
+
+                }
+                System.out.println("Vali uuesti tegevus:");
+                System.out.println(
+                                "0 - kui soovite portaalist lahkuda" + "\n" +
+                                "1 - otsi kinnisvara" + "\n" +
+                                "2 - loo endale kaust" + "\n" +
+                                "3 - lisa sõber kausta" + "\n" +
+                                "4 - eemalda end kaustast" + "\n" );
+                tegevus = scan.nextInt();
+
+                }
             }
-
-
-
-
     }
-
 }
