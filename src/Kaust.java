@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Kaust {
     private String nimi;
@@ -74,4 +75,30 @@ public class Kaust {
         KinnisvaradKeskmised = kinnisvaradKeskmised;
     }
 
+    public String kasutajateNimed(){
+        String kasutajanimed = null;
+        for (Kasutaja i:kaustaKasutajad) {
+            kasutajanimed += i.getEesnimi() + " " + i.getPerenimi() + "   ";
+        }
+        return kasutajanimed;
+    }
+
+    public String väljastaKinnisvarad(){
+        for(Map.Entry<Kinnisvara, Double> entry : KinnisvaradKeskmised.entrySet()) {
+            Integer kvid = entry.getKey().getId();
+            Double khinnang = entry.getValue();
+            System.out.println("Kinnisvara id-ga: " + kvid + " hinnang = " + khinnang + "; ");
+        }
+        return " ";
+    }
+
+
+    @Override
+    public String toString() {
+        return "Kaust: " + "\n" +
+                "nimi = " + nimi + "\n" +
+                ", kasutajad = " + kasutajateNimed() + "\n" +
+                ", kinnisvarad = " +  "\n" + väljastaKinnisvarad();
+
+    }
 }

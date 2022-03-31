@@ -9,14 +9,14 @@ public class Kinnisvara {
     private double hindkuus;
     private double m2; // ruutmeeri hind arvutatakse meetodiga
     private String maakond = null;
-    private String linn = null;
+    private String asula = null;
     private String tänav = null;
     private String majanumber = null; // kujul maja/korter
     private String korrus = null; //kujul korrus/korruseidkokku, kui mitu korrust siis korrus-korrus/korruseidkokku
     private int tube;
     private double magamistube; //võib olla ka nt 2,5 magamistuba, kus poolik on potentsiaalne magamistuba
     private double vannitube; //võib olla ka 0,5 vannituba, kus pooliu all on mõeldud ainult vetsu
-    private String aed; //väärtused 0 - ei 1 - on
+    private String aed; //väärtused jah / ei
     private String kirjeldus;
     private List<String> lisad = new ArrayList<>(); //garaaž,parkimiskoht,nõudepesumasin, pesumasin jne, neid saab lisada kas kohe konstruktoris või hiljem lisada ka eraldi meetodiga
 
@@ -29,7 +29,7 @@ public class Kinnisvara {
         this.hindkuus = hindkuus;
         this.m2 = m2;
         this.maakond = maakond;
-        this.linn = linn;
+        this.asula = linn;
         this.tänav = tänav;
         this.majanumber = majanumber;
         this.korrus = korrus;
@@ -64,8 +64,8 @@ public class Kinnisvara {
         return maakond;
     }
 
-    public String getLinn() {
-        return linn;
+    public String getAsula() {
+        return asula;
     }
 
     public String getTänav() {
@@ -121,8 +121,8 @@ public class Kinnisvara {
         this.maakond = maakond;
     }
 
-    public void setLinn(String linn) {
-        this.linn = linn;
+    public void setAsula(String asula) {
+        this.asula = asula;
     }
 
     public void setTänav(String tänav) {
@@ -168,23 +168,32 @@ public class Kinnisvara {
 
     @Override
     public String toString() {
-        return "Kinnisvara{" +
-                "Id=" + Id +
-                ", nimi='" + nimi + '\'' +
-                ", omanik=" + omanik +
-                ", hindkuus=" + hindkuus +
-                ", m2=" + m2 +
-                ", maakond='" + maakond + '\'' +
-                ", linn='" + linn + '\'' +
-                ", tänav='" + tänav + '\'' +
-                ", majanumber='" + majanumber + '\'' +
-                ", korrus='" + korrus + '\'' +
-                ", tube=" + tube +
-                ", magamistube=" + magamistube +
-                ", vannitube=" + vannitube +
-                ", aed='" + aed + '\'' +
-                ", kirjeldus='" + kirjeldus + '\'' +
-                ", lisad=" + lisad +
-                '}';
+        StringBuilder out = new StringBuilder();
+         out.append("Kinnisvara: " +  "\n" +
+                        "  Id = " + Id +  "\n" );
+         if (nimi != null){
+             out.append( "  nimi='" + nimi +  "\n");
+         }
+         out.append(
+                "  omanik = " + omanik + "\n" +
+                "  hindkuus = " + hindkuus + "\n" +
+                "  m2 = " + m2 + "\n" +
+                "  aadress = " + maakond + ", " +
+                  asula + ", " +
+                  tänav + ", " +
+                  majanumber + ", " +
+                  korrus +  ", " + "\n" +
+                "  tube = " + tube + "\n" +
+                "  magamistube = " + magamistube + "\n" +
+                "  vannitube = " + vannitube + "\n" +
+                "  aed = " + aed + "\n" +
+                "  kirjeldus = " + kirjeldus);
+         if(lisad.size() != 0){
+             out.append("\n" + "  Lisad = ");
+             for (String o:lisad){
+                 out.append(o + " ");
+             }
+         }
+         return out.toString();
     }
 }
