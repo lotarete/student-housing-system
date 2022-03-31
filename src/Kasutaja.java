@@ -59,12 +59,9 @@ public class Kasutaja {
 
     @Override
     public String toString() {
-        return "Kasutaja{" +
-                "eesnimi='" + eesnimi + '\'' +
-                ", perenimi='" + perenimi + '\'' +
-                ", email='" + email + '\'' +
-                ", telefon='" + telefon + '\'' +
-                ", synnipaev=" + synnipaev +
-                '}';
+        return "nimi = " + eesnimi + " " + perenimi +
+                ", email = " + email +
+                ", telefon = " + telefon +
+                ", synnipaev = " + synnipaev;
     }
 }

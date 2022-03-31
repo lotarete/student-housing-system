@@ -18,14 +18,16 @@ public class Peaklass {
         kinnisvarad.add(mariKorter); kinnisvarad.add(marimaja); kinnisvarad.add(jaaniKorter);
         kasutajad.add(mari); kasutajad.add(jaan);
         Rentnik liisa = new Rentnik("Liisa", "Liblikas", "liisa@mail.ee", "5674839", "21/05/2000");
+        Rentnik karl = new Rentnik("Karl", "Kaar", "karl@gmail.com", "5683002", "21/05/2000");
+        kasutajad.add(liisa); kasutajad.add(karl);
 
             System.out.println("Tere tulemast Üliõpilaskodu süsteemi!");
             //KASUTAJA KONTROLL
             System.out.println("Kas olete kinnisvaraomanik (sisesta 0) või rentnik (sisesta 1)?");
             int kasutaja = scan.nextInt();
-            System.out.println("Kas teil on juba kasutaja olemas (sisesta 1) või soovite selle luua (sisestage 0)");
+            System.out.println("Kas teil on juba kasutaja olemas (sisesta 0) või soovite selle luua (sisestage 1)");
             int kasutajaolemas = scan.nextInt();
-            if (kasutajaolemas == 0) {
+            if (kasutajaolemas == 1) {
                 System.out.println("Loome teile kasutaja." + "\n" + "Selleks sisestage enda eesnimi");
                 scan.nextLine();
                 String eesnimi = scan.nextLine();
@@ -48,7 +50,7 @@ public class Peaklass {
                     System.out.println("Palun sisesta küsitud andmed korrektselt!");
 
                 aktiivnekasutaja = kasutajad.get(kasutajad.size()-1);
-            } else if (kasutajaolemas == 1) {
+            } else if (kasutajaolemas == 0) {
                 //KASUTAJA LEIDMINE
                 System.out.println("Selleks sisestage enda eesnimi");
                 scan.nextLine();
@@ -62,7 +64,7 @@ public class Peaklass {
                 }
             } else
                 System.out.println("Palun sisesta küsitud andmed korrektselt!");
-            System.out.println(aktiivnekasutaja.getClass());
+
             //omaniku tegevused
             if(aktiivnekasutaja instanceof Omanik) {
                 System.out.println("Vali tegevus:");
@@ -70,7 +72,8 @@ public class Peaklass {
                                 "0 - kui soovite portaalist lahkuda" + "\n" +
                                 "1 - lisa kinnisvara" + "\n" +
                                 "2 - kustuta kinnisvara" + "\n" +
-                                "3 - vaata oma kinnisvara" + "\n");
+                                "3 - vaata oma kinnisvara" + "\n" +
+                                "4 - väljasta portaali kinnisvara" + "\n");
                 int tegevus = scan.nextInt();
                 while (tegevus != 0) {
                     if (tegevus == 1) {
@@ -160,24 +163,34 @@ public class Peaklass {
                     } else if (tegevus == 3) {
                         System.out.println(((Omanik) aktiivnekasutaja).getOmanikukinnisvarad());
                     }
+                    else if(tegevus == 4){
+                        System.out.println("Saadaolevad kinnisvarad on järgmised: ");
+                        for(Kinnisvara kinnisvara : kinnisvarad){
+                            System.out.println(kinnisvara);
+                        }
+                    }
                     System.out.println("Vali uuesti tegevus:");
                     System.out.println(
                                     "0 - kui soovite portaalist lahkuda" + "\n" +
                                     "1 - lisa kinnisvara" + "\n" +
                                     "2 - kustuta kinnisvara" + "\n" +
-                                    "3 - vaata oma kinnisvara" + "\n");
+                                    "3 - vaata oma kinnisvara" + "\n" +
+                                    "4 - väljasta oma kinnisvara" + "\n");
                     tegevus = scan.nextInt();
+
                 }
             }
+
             //rentniku tegevused
-            else if (aktiivnekasutaja instanceof Rentnik){
+            else if (aktiivnekasutaja.getClass() == Rentnik.class ){
                 System.out.println("Vali tegevus:");
                 System.out.println(
                                 "0 - kui soovite portaalist lahkuda" + "\n" +
                                 "1 - otsi kinnisvara" + "\n" +
                                 "2 - loo endale kaust" + "\n" +
-                                "3 - lisa sõber kausta" + "\n" +
-                                "4 - eemalda end kaustast" + "\n" );
+                                "3 - vaata enda kaustasid" + "\n" +
+                                "4 - lisa sõber kausta" + "\n" +
+                                "5 - eemalda end kaustast" + "\n" );
                 int tegevus = scan.nextInt();
                 while(tegevus!=0){
                 if(tegevus == 1){ //hetkel väljastab kõik saadaolevad pakkumised, ei tee suuremat filtreerimist, hiljem teen täpsemaks
@@ -205,6 +218,50 @@ public class Peaklass {
                             System.out.println(kinnisvara);
                         }
                     }
+
+                    //kinnisvara lisamine kausta otse majade juurest
+                    List<Integer> meeldivad = new ArrayList<>();
+                    while (true) {
+                        Kinnisvara abikv = new Kinnisvara();
+                        System.out.println("Kas midagi jäi silma? Sisesta meeldiva kinnisvara id, et seda kausta lisada. (sisesta 0 kui soovid edasi liikuda)");
+                        int meeldiv = scan.nextInt();
+                        if (meeldiv != 0) {
+                            if(((Rentnik) aktiivnekasutaja).getKaustad().size()==0){
+                                System.out.println("NB! Kuna sul veel ühtegi kausta pole, mine loo endale enne kaust");
+                                break;
+                            }
+                            System.out.println("Sinu kaustad: ");
+                            System.out.println(((Rentnik) aktiivnekasutaja).getKaustad());
+                            System.out.println("Sisesta kausta nimi, kuhu soovid salestatud kinnisvara lisada: ");
+                            scan.nextLine();
+                            String kaustanimi = scan.nextLine();
+                            //võtab kinnisvara
+                            for(Kinnisvara kv:kinnisvarad) {
+                                if(kv.getId() == meeldiv){
+                                    abikv = kv;
+                                }
+                            }
+                            System.out.println("Lisage kinnisvarale id-ga "+meeldiv+" hinnang 1-10: ");
+                            double hinnang=scan.nextDouble();
+                            //loome hashmapi
+                            if(1 <= hinnang && hinnang <= 10){
+                                for (Kaust i: ((Rentnik) aktiivnekasutaja).getKaustad()) {
+                                   if(i.getNimi().equals(kaustanimi)){
+                                       i.lisaHinnang(abikv,hinnang);
+                                   }
+                                }
+                            }
+
+
+
+
+                            //
+                        }
+                        else if (meeldiv == 0){
+                            break;
+                        }
+                    }
+
                 }
                 else if(tegevus == 2){ //loome kausta
                     System.out.println("Loome kausta: ");
@@ -225,6 +282,10 @@ public class Peaklass {
                         }
                     }
 
+                    System.out.println("Portaalis olevad kinnisvarad: ");
+                    for(Kinnisvara kinnisvara : kinnisvarad){
+                        System.out.println(kinnisvara);
+                    }
 
                     while(n > 0) {
                         System.out.println("Sisestage kinnisvara id, mida soovite kausta lisada: ");
@@ -235,16 +296,30 @@ public class Peaklass {
                                 abiks = kv;
                             }
                         }
-                        n--;
-                        System.out.println("Lisage kinnisvarale id-ga "+id+" hinnang 1-10: ");
-                        double hinnang=scan.nextDouble();
-                        //loome hashmapi
-                        if(1 <= hinnang && hinnang <= 10){
-                            abi.lisaHinnang(abiks,hinnang);
+                        if (abiks.getId() != 0){
+                            System.out.println("Lisage kinnisvarale id-ga "+id+" hinnang 1-10: ");
+                            double hinnang=scan.nextDouble();
+                            //loome hashmapi
+                            if(1 <= hinnang && hinnang <= 10){
+                                abi.lisaHinnang(abiks,hinnang);
+                            }
                         }
+                        else{
+                            System.out.println("Sellise id-ga kinnisvara ei ole!");
+                        }
+                        n--;
+
                     }
+                    System.out.println("Kaust on loodud");
+                    System.out.println("Teie kaust: ");
+                    System.out.println(abi);
+
                 }
-                else if(tegevus == 3){ //lisame inimesi kausta juurde
+                else if(tegevus == 3){ //väljasta oma kaustad
+                    System.out.println("Sinu kaustad: ");
+                    System.out.println(((Rentnik) aktiivnekasutaja).getKaustad());
+                }
+                else if(tegevus == 4){ //lisame inimesi kausta juurde
                     System.out.println("Lisame kausta inimese juurde");
                     System.out.println("Sisestage kausta nimi: ");
                     String nimiK = scan.nextLine();
@@ -270,7 +345,7 @@ public class Peaklass {
                     abiKaust.getKaustaKasutajad().add(abiksKasutaja);
                     System.out.println("Kasutaja "+enimi+" "+pnimi+"on lisatud kausta "+nimiK+".");
                 }
-                else if(tegevus == 4){ //eemaldame inimese kaustast
+                else if(tegevus == 5){ //eemaldame inimese kaustast
                     System.out.println("Eemaldame kaustast kasutaja: ");
                     System.out.println("Sisestage kausta nimi: ");
                     String kaustNimi = scan.nextLine();
@@ -300,11 +375,12 @@ public class Peaklass {
                 }
                 System.out.println("Vali uuesti tegevus:");
                 System.out.println(
-                                "0 - kui soovite portaalist lahkuda" + "\n" +
+                        "0 - kui soovite portaalist lahkuda" + "\n" +
                                 "1 - otsi kinnisvara" + "\n" +
                                 "2 - loo endale kaust" + "\n" +
-                                "3 - lisa sõber kausta" + "\n" +
-                                "4 - eemalda end kaustast" + "\n" );
+                                "3 - vaata enda kaustasid" + "\n" +
+                                "4 - lisa sõber kausta" + "\n" +
+                                "5 - eemalda end kaustast" + "\n" );
                 tegevus = scan.nextInt();
 
                 }

@@ -40,6 +40,7 @@ public class Rentnik extends Kasutaja {
         return kaustad;
     }
 
+
     public void setKaustad(List<Kaust> kaustad) {
         this.kaustad = kaustad;
     }
