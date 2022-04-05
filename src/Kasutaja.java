@@ -62,6 +62,6 @@ public class Kasutaja {
         return "nimi = " + eesnimi + " " + perenimi +
                 ", email = " + email +
                 ", telefon = " + telefon +
-                ", synnipaev = " + synnipaev;
+                ", sünnipaev = " + synnipaev;
     }
 }
