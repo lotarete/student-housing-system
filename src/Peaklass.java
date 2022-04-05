@@ -26,7 +26,7 @@ public class Peaklass {
         Rentnik karl = new Rentnik("Karl", "Kaar", "karl@gmail.com", "5683002", "21/05/2000");
         kasutajad.add(liisa); kasutajad.add(karl);
 
-            System.out.println("Tere tulemast Üliõpilaskodu süsteemi!");
+            System.out.println("Tere tulemast Üliõpilaskodu süsteemi! Portaalist lahkumiseks võid igal hetkel sisestada \"Lõpp\"");
             Random rand = new Random();
             Kinnisvara suvalineKinnisvara = kinnisvarad.get(rand.nextInt(kinnisvarad.size()));
             System.out.println("Soovitame sulle: "+"\n"+suvalineKinnisvara);

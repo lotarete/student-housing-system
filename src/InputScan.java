@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class InputScan {
     Scanner scan = new Scanner(System.in);
-    EndWhile lopp = new EndWhile();
 
     public int IntScan(){
         while(true){
