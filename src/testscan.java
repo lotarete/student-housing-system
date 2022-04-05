@@ -1,8 +1,19 @@
 public class testscan {
     public static void main(String[] args) {
-        InputScan scan = new InputScan();
-        System.out.println("siseta arv");
-        int i= scan.IntScan();
-        System.out.println(i);
+        while(true){
+            InputScan scan = new InputScan();
+            int test;
+            System.out.println("siseta arv");
+            test= scan.IntScan();
+            if(test == -98765){
+                break;
+            }
+            int i = test;
+            System.out.println(i);
+
+
+
+        }
+
     }
 }

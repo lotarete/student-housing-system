@@ -3,7 +3,12 @@ import java.util.*;
 
 public class Peaklass {
     public static void main(String[] args) throws Exception {
+        InputScan skanner = new InputScan();
         Scanner scan = new Scanner(System.in);
+        int testi;
+        Double testd;
+        String tests;
+        while(true){
         List<Kasutaja> kasutajad = new ArrayList<>();
         List<Kinnisvara> kinnisvarad = new ArrayList<>();
         Kasutaja aktiivnekasutaja = new Kasutaja();
@@ -22,23 +27,53 @@ public class Peaklass {
         kasutajad.add(liisa); kasutajad.add(karl);
 
             System.out.println("Tere tulemast Üliõpilaskodu süsteemi!");
+            Random rand = new Random();
+            Kinnisvara suvalineKinnisvara = kinnisvarad.get(rand.nextInt(kinnisvarad.size()));
+            System.out.println("Soovitame sulle: "+"\n"+suvalineKinnisvara);
             //KASUTAJA KONTROLL
             System.out.println("Kas olete kinnisvaraomanik (sisesta 0) või rentnik (sisesta 1)?");
-            int kasutaja = scan.nextInt();
+            testi= skanner.IntScan();
+            if(testi == -98765){
+                break;
+            }
+            int kasutaja = testi;
             System.out.println("Kas teil on juba kasutaja olemas (sisesta 0) või soovite selle luua (sisestage 1)");
-            int kasutajaolemas = scan.nextInt();
+            testi= skanner.IntScan();
+            if(testi == -98765){
+                break;
+            }
+            int kasutajaolemas = testi;
             if (kasutajaolemas == 1) {
                 System.out.println("Loome teile kasutaja." + "\n" + "Selleks sisestage enda eesnimi");
-                scan.nextLine();
-                String eesnimi = scan.nextLine();
+                tests= skanner.StringScan();
+                if(tests.equals("-98765")){
+                    break;
+                }
+                String eesnimi = tests;
                 System.out.println("Selleks sisestage enda perenimi");
-                String perenimi = scan.nextLine();
+                tests= skanner.StringScan();
+                if(tests.equals("-98765")){
+                    break;
+                }
+                String perenimi = tests;
                 System.out.println("Selleks sisestage enda email");
-                String email = scan.nextLine();
+                tests= skanner.StringScan();
+                if(tests.equals("-98765")){
+                    break;
+                }
+                String email = tests;
                 System.out.println("Selleks sisestage enda telefon");
-                String telefon = scan.nextLine();
+                tests= skanner.StringScan();
+                if(tests.equals("-98765")){
+                    break;
+                }
+                String telefon = tests;
                 System.out.println("Selleks sisestage enda sünnipäev kujul pp/kk/aaaa");
-                String kuupaev = scan.nextLine();
+                tests= skanner.StringScan();
+                if(tests.equals("-98765")){
+                    break;
+                }
+                String kuupaev = tests;
                 //KASUTAJA LOOMINE
                 if (kasutaja == 0) {
                     kasutajad.add(new Omanik(eesnimi, perenimi, email, telefon, kuupaev));
@@ -53,18 +88,30 @@ public class Peaklass {
             } else if (kasutajaolemas == 0) {
                 //KASUTAJA LEIDMINE
                 System.out.println("Selleks sisestage enda eesnimi");
-                scan.nextLine();
-                String eesnimi = scan.nextLine();
+                tests= skanner.StringScan();
+                if(tests.equals("-98765")){
+                    break;
+                }
+                String eesnimi = tests;
                 System.out.println("Selleks sisestage enda perenimi");
-                String perenimi = scan.nextLine();
+                tests= skanner.StringScan();
+                if(tests.equals("-98765")){
+                    break;
+                }
+                String perenimi = tests;
                 for (Kasutaja i: kasutajad) {
                     if(i.getEesnimi().equals(eesnimi) && i.getPerenimi().equals(perenimi)){
                         aktiivnekasutaja = i;
                     }
                 }
-            } else
+                if(aktiivnekasutaja.getEesnimi()==null){
+                    System.out.println("Sellist kasutajat ei leidu. ");
+                    continue;
+                }
+            } else {
                 System.out.println("Palun sisesta küsitud andmed korrektselt!");
-
+                continue;
+            }
             //omaniku tegevused
             if(aktiivnekasutaja instanceof Omanik) {
                 System.out.println("Vali tegevus:");
@@ -74,49 +121,96 @@ public class Peaklass {
                                 "2 - kustuta kinnisvara" + "\n" +
                                 "3 - vaata oma kinnisvara" + "\n" +
                                 "4 - väljasta portaali kinnisvara" + "\n");
-                int tegevus = scan.nextInt();
+                testi= skanner.IntScan();
+                if(testi == -98765){
+                    break;
+                }
+                int tegevus = testi;
                 while (tegevus != 0) {
                     if (tegevus == 1) {
                         Kasutaja omanik = aktiivnekasutaja;
                         System.out.println("Lisame kinnisvara." + "\n" + "Kas tegu on maja (sistage 0) või korteriga (sisetage 1)");
-                        scan.nextLine();
-                        int kvtyyp = scan.nextInt();
+                        testi= skanner.IntScan();
+                        if(testi == -98765){
+                            break;
+                        }
+                        int kvtyyp = testi;
                         System.out.println("Sisestage üüripinna kuurent eurodes");
-                        scan.nextLine();
-                        double hindkuus = scan.nextDouble();
+                        testd= skanner.DoublScan();
+                        if(testd == -98765.0){
+                            break;
+                        }
+                        double hindkuus = testd;
                         System.out.println("Sisestage üüripind ruutmeetrites");
-                        scan.nextLine();
-                        double m2 = scan.nextDouble();
+                        testd= skanner.DoublScan();
+                        if(testd == -98765.0){
+                            break;
+                        }
+                        double m2 = testd;
                         System.out.println("Sisetage maakond");
-                        scan.nextLine();
-                        String maakond = scan.nextLine();
+                        tests= skanner.StringScan();
+                        if(tests.equals("-98765")){
+                            break;
+                        }
+                        String maakond = tests;
                         System.out.println("Sisetage asula, kui asula puudub sisetage \"puudub\"");
-                        String linnsisse = scan.nextLine();
+                        tests= skanner.StringScan();
+                        if(tests.equals("-98765")){
+                            break;
+                        }
+                        String linnsisse = tests;
                         String linn = new String();
                         if (!linnsisse.equals("puudub"))
                             linn = linnsisse;
                         else
                             linn = "täpsustamata";
                         System.out.println("Sisetage tänav, kui tänav puudub sisetage \"puudub\"");
-                        String tänavsisse = scan.nextLine();
+                        tests= skanner.StringScan();
+                        if(tests.equals("-98765")){
+                            break;
+                        }
+                        String tänavsisse = tests;
                         String tänav = new String();
-                        if (!linnsisse.equals("puudub"))
+                        if (!tänavsisse.equals("puudub"))
                             tänav = tänav;
                         else
                             tänav = "täpsustamata";
                         System.out.println("Sisetage tänavanumber");
-                        String majanumber = scan.nextLine();
+                        tests= skanner.StringScan();
+                        if(tests.equals("-98765")){
+                            break;
+                        }
+                        String majanumber = tests;
                         System.out.println("Sisetage korrus kujul korrus/korruseid kokku, kui mitu korrust siis korrus-korrus/korruseidkokku");
-                        String korrus = scan.nextLine();
+                        tests= skanner.StringScan();
+                        if(tests.equals("-98765")){
+                            break;
+                        }
+                        String korrus =tests;
                         System.out.println("Sisetage tubade arv");
-                        int tube = scan.nextInt();
+                        testi= skanner.IntScan();
+                        if(testi == -98765){
+                            break;
+                        }
+                        int tube = testi;
                         System.out.println("Sisetage magamistubade arv");
-                        double magamistube = scan.nextDouble();
+                        testd= skanner.DoublScan();
+                        if(testd == -98765.0){
+                            break;
+                        }
+                        double magamistube = testd;
                         System.out.println("Sisetage vannitubade arv");
-                        double vannitube = scan.nextDouble();
+                        testd= skanner.DoublScan();
+                        if(testd == -98765.0){
+                            break;
+                        }
+                        double vannitube = testd;
                         System.out.println("Kas üüripinnal on aed? Sisetage \"jah\", \"ei\"");
-                        scan.nextLine();
-                        String aed = scan.nextLine();
+                        tests= skanner.StringScan();
+                        if(tests.equals("-98765")){
+                            break;
+                        }
+                        String aed = tests;
                         System.out.println("Lisage lühike kirjeldus");
                         String kirjeldus = scan.nextLine();
                         if (kvtyyp == 0)
@@ -124,11 +218,18 @@ public class Peaklass {
                         else if (kvtyyp == 1)
                             kinnisvarad.add(new Korter(omanik, hindkuus, m2, maakond, linn, tänav, majanumber, korrus, tube, magamistube, vannitube, aed, kirjeldus));
                         System.out.println("Kas korteril on erilisi lisasid nagu näiteks garaaž, saun, terass jne? Sistage 0, kui soovite sisetada kuulutusele lisasid, 1 kui soovite kinnisvara portaali lisada");
-                        int lisasidsistema = scan.nextInt();
+                        testi= skanner.IntScan();
+                        if(testi == -98765){
+                            break;
+                        }
+                        int lisasidsistema = testi;
                         if (lisasidsistema == 0) {
                             System.out.println("Sisetage lisad kujul: lisa, lisa, lisa jne");
-                            scan.nextLine();
-                            String lisarida = scan.nextLine();
+                            tests= skanner.StringScan();
+                            if(tests.equals("-98765")){
+                                break;
+                            }
+                            String lisarida = tests;
                             List<String> lisad = new ArrayList<String>(Arrays.asList(lisarida.strip().split(", ")));
                             for (String Lisa : lisad) {
                                 kinnisvarad.get(kinnisvarad.size() - 1).lisaLisa(Lisa);
@@ -147,7 +248,11 @@ public class Peaklass {
                             System.out.println(kv);
                         }
                         System.out.println("Sisesta kinnisvara id, mida soovid kustutada");
-                        int kustutaindeks = scan.nextInt();
+                        testi= skanner.IntScan();
+                        if(testi == -98765){
+                            break;
+                        }
+                        int kustutaindeks = testi;
                         Kinnisvara kustuta = new Kinnisvara();
                         for (Kinnisvara kv : kinnisvarad) {
                             if (kv.getId() == kustutaindeks) {
@@ -176,7 +281,11 @@ public class Peaklass {
                                     "2 - kustuta kinnisvara" + "\n" +
                                     "3 - vaata oma kinnisvara" + "\n" +
                                     "4 - väljasta oma kinnisvara" + "\n");
-                    tegevus = scan.nextInt();
+                    testi= skanner.IntScan();
+                    if(testi == -98765){
+                        break;
+                    }
+                    tegevus = testi;
 
                 }
             }
@@ -191,11 +300,19 @@ public class Peaklass {
                                 "3 - vaata enda kaustasid" + "\n" +
                                 "4 - lisa sõber kausta" + "\n" +
                                 "5 - eemalda end kaustast" + "\n" );
-                int tegevus = scan.nextInt();
+                testi= skanner.IntScan();
+                if(testi == -98765){
+                    break;
+                }
+                int tegevus = testi;
                 while(tegevus!=0){
                 if(tegevus == 1){ //hetkel väljastab kõik saadaolevad pakkumised, ei tee suuremat filtreerimist, hiljem teen täpsemaks
                     System.out.println("Mille üürimisest oleksite huvitatud – maja (sisestage 0), korteri (sisestage 1), mõlema (sisestage 2)");
-                    int valik1= scan.nextInt();
+                    testi= skanner.IntScan();
+                    if(testi == -98765){
+                        break;
+                    }
+                    int valik1= testi;
                     if(valik1 == 0){
                         System.out.println("Saadaolevad majad on järgmised: ");
                         for(Kinnisvara kinnisvara : kinnisvarad){
@@ -224,7 +341,11 @@ public class Peaklass {
                     while (true) {
                         Kinnisvara abikv = new Kinnisvara();
                         System.out.println("Kas midagi jäi silma? Sisesta meeldiva kinnisvara id, et seda kausta lisada. (sisesta 0 kui soovid edasi liikuda)");
-                        int meeldiv = scan.nextInt();
+                        testi= skanner.IntScan();
+                        if(testi == -98765){
+                            break;
+                        }
+                        int meeldiv = testi;
                         if (meeldiv != 0) {
                             if(((Rentnik) aktiivnekasutaja).getKaustad().size()==0){
                                 System.out.println("NB! Kuna sul veel ühtegi kausta pole, mine loo endale enne kaust");
@@ -233,8 +354,11 @@ public class Peaklass {
                             System.out.println("Sinu kaustad: ");
                             System.out.println(((Rentnik) aktiivnekasutaja).getKaustad());
                             System.out.println("Sisesta kausta nimi, kuhu soovid salestatud kinnisvara lisada: ");
-                            scan.nextLine();
-                            String kaustanimi = scan.nextLine();
+                            tests= skanner.StringScan();
+                            if(tests.equals("-98765")){
+                                break;
+                            }
+                            String kaustanimi = tests;
                             //võtab kinnisvara
                             for(Kinnisvara kv:kinnisvarad) {
                                 if(kv.getId() == meeldiv){
@@ -242,7 +366,11 @@ public class Peaklass {
                                 }
                             }
                             System.out.println("Lisage kinnisvarale id-ga "+meeldiv+" hinnang 1-10: ");
-                            double hinnang=scan.nextDouble();
+                            testd= skanner.DoublScan();
+                            if(testd == -98765.0){
+                                break;
+                            }
+                            double hinnang=testd;
                             //loome hashmapi
                             if(1 <= hinnang && hinnang <= 10){
                                 for (Kaust i: ((Rentnik) aktiivnekasutaja).getKaustad()) {
@@ -266,10 +394,17 @@ public class Peaklass {
                 else if(tegevus == 2){ //loome kausta
                     System.out.println("Loome kausta: ");
                     System.out.println("Pange enda kaustale nimi: ");
-                    scan.nextLine();
-                    String kaustaNimi=scan.nextLine();
+                    tests= skanner.StringScan();
+                    if(tests.equals("-98765")){
+                        break;
+                    }
+                    String kaustaNimi=tests;
                     System.out.println("Sisestage kinnisvarade arv, mida soovite kausta lisada: ");
-                    int n= scan.nextInt();
+                    testi= skanner.IntScan();
+                    if(testi == -98765){
+                        break;
+                    }
+                    int n= testi;
 
                     Kinnisvara abiks = new Kinnisvara();
                     Kaust abi = new Kaust();
@@ -289,7 +424,11 @@ public class Peaklass {
 
                     while(n > 0) {
                         System.out.println("Sisestage kinnisvara id, mida soovite kausta lisada: ");
-                        int id=scan.nextInt();
+                        testi= skanner.IntScan();
+                        if(testi == -98765){
+                            break;
+                        }
+                        int id=testi;
                         //võtab kinnisvara
                         for(Kinnisvara kv:kinnisvarad) {
                             if(kv.getId() == id){
@@ -298,7 +437,11 @@ public class Peaklass {
                         }
                         if (abiks.getId() != 0){
                             System.out.println("Lisage kinnisvarale id-ga "+id+" hinnang 1-10: ");
-                            double hinnang=scan.nextDouble();
+                            testd= skanner.DoublScan();
+                            if(testd == -98765.0){
+                                break;
+                            }
+                            double hinnang=testd;
                             //loome hashmapi
                             if(1 <= hinnang && hinnang <= 10){
                                 abi.lisaHinnang(abiks,hinnang);
@@ -322,7 +465,11 @@ public class Peaklass {
                 else if(tegevus == 4){ //lisame inimesi kausta juurde
                     System.out.println("Lisame kausta inimese juurde");
                     System.out.println("Sisestage kausta nimi: ");
-                    String nimiK = scan.nextLine();
+                    tests= skanner.StringScan();
+                    if(tests.equals("-98765")){
+                        break;
+                    }
+                    String nimiK = tests;
                     Kaust abiKaust = null;
                     Rentnik abiksKasutaja = null;
                     for(Kaust kaust: ((Rentnik) aktiivnekasutaja).getKaustad()){
@@ -331,9 +478,17 @@ public class Peaklass {
                         }
                     }
                     System.out.println("Sisestage inimese eesnimi, keda soovite lisada: ");
-                    String enimi = scan.nextLine();
+                    tests= skanner.StringScan();
+                    if(tests.equals("-98765")){
+                        break;
+                    }
+                    String enimi = tests;
                     System.out.println("Sisestage inimese perekonnanimi, keda soovite lisada: ");
-                    String pnimi = scan.nextLine();
+                    tests= skanner.StringScan();
+                    if(tests.equals("-98765")){
+                        break;
+                    }
+                    String pnimi = tests;
 
                     for(Kasutaja inimene : kasutajad){
                         if(inimene instanceof Rentnik) {
@@ -348,7 +503,11 @@ public class Peaklass {
                 else if(tegevus == 5){ //eemaldame inimese kaustast
                     System.out.println("Eemaldame kaustast kasutaja: ");
                     System.out.println("Sisestage kausta nimi: ");
-                    String kaustNimi = scan.nextLine();
+                    tests= skanner.StringScan();
+                    if(tests.equals("-98765")){
+                        break;
+                    }
+                    String kaustNimi = tests;
                     Kaust abiKaust = null;
                     Rentnik abiksKasutaja = null;
                     for(Kaust kaust: ((Rentnik) aktiivnekasutaja).getKaustad()){
@@ -357,9 +516,17 @@ public class Peaklass {
                         }
                     }
                     System.out.println("Sisestage inimese eesnimi, keda soovite eemaldada: ");
-                    String enimi = scan.nextLine();
+                    tests= skanner.StringScan();
+                    if(tests.equals("-98765")){
+                        break;
+                    }
+                    String enimi = tests;
                     System.out.println("Sisestage inimese perekonnanimi, keda soovite eemaldada: ");
-                    String pnimi = scan.nextLine();
+                    tests= skanner.StringScan();
+                    if(tests.equals("-98765")){
+                        break;
+                    }
+                    String pnimi = tests;
 
 
                     for(Kasutaja inimene : kasutajad){
@@ -381,9 +548,14 @@ public class Peaklass {
                                 "3 - vaata enda kaustasid" + "\n" +
                                 "4 - lisa sõber kausta" + "\n" +
                                 "5 - eemalda end kaustast" + "\n" );
-                tegevus = scan.nextInt();
+                testi= skanner.IntScan();
+                if(testi == -98765){
+                        break;
+                }
+                tegevus = testi;
 
                 }
             }
-    }
+            break;
+    }}
 }
