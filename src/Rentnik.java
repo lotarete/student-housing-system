@@ -8,10 +8,11 @@ public class Rentnik extends Kasutaja {
     public Rentnik(String eesnimi, String perenimi, String email, String telefon, String sünnipaev) throws ParseException {
         super(eesnimi, perenimi, email, telefon, sünnipaev);
     }
-
+    /*
     public String otsiKinnisvara(){
         return null;
     }
+     */
 
     public void lisaKaust(Kaust kaust){
         kaustad.add(kaust);
@@ -32,9 +33,10 @@ public class Rentnik extends Kasutaja {
 
     }
 
-    //?
+    /*
     public void otsiOmanik(){
     }
+     */
 
     public List<Kaust> getKaustad() {
         return kaustad;
