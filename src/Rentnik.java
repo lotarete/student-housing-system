@@ -33,9 +33,10 @@ public class Rentnik extends Kasutaja {
 
     }
 
-    //?
+    /*
     public void otsiOmanik(){
     }
+     */
 
     public List<Kaust> getKaustad() {
         return kaustad;
