@@ -20,7 +20,6 @@ public class Kasutaja {
         this.synnipaev = new SimpleDateFormat("dd/MM/yyyy").parse(sünnipaev);
     }
 
-
     public String getEesnimi() {
         return eesnimi;
     }
